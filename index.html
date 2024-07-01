@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>-: MATH METHODS :-</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="blue"></div>
+    <div class="heading">
+      <div class="space"></div>
+      <div class="head">
+        <h1>
+          Rounding numbers ;<br />
+          Generating random numbers ;<br />
+          Converting strings to integers and decimals ;<br />
+          Converting strings to numbers, numbers to strings ;<br />
+          Controlling the length of decimals ;
+        </h1>
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="blue-buttom">
+      <div class="para">
+        Assinment # 26-30 <br />
+        JAVASCRIPT
+      </div>
+    </div>
+    <div class="chap">
+      <h1><br />C h a p t e r s</h1>
+      <br />
+    </div>
+
+    <div class="moiz">
+      <h1>-: Rounding numbers :-</h1>
+      <p class="ali">
+        You run an online music service where customers rate each song. You
+        aggregate all the <br />
+        customer ratings and average them, awarding a song from zero to five
+        stars. Usually, averaging <br />
+        produces a fraction. You need to round it to the nearest integer so you
+        can translate the number <br />
+        into stars. Suppose the average has been assigned to the variable
+        scoreAvg. Here's the code <br />
+        that rounds it to the nearest integer. <br />
+        var numberOfStars = Math.round(scoreAvg); <br />
+        <br />
+        Things to keep in mind: <br />
+        Math. is how all math functions begin. The "M" must be capped. <br />
+        The function rounds up when the decimal is .5. It rounds 1.5 to 2, 2.5
+        to 3, etc. It rounds - <br />
+        1.5 to -1, -2.5 to -2, etc. <br />
+        When the result is assigned to a new variable, as in the example above,
+        the unrounded <br />
+        number enclosed in parentheses is preserved. But you can assign the
+        rounded number to the <br />
+        original variable, and the unrounded number will be replaced by the
+        rounded number. <br />
+        scoreAvg = Math.round(scoreAvg); <br />
+        Instead of a variable, you can enclose a literal number in the
+        parentheses. <br />
+        <br />
+        var scoreAvg = Math.round(.0678437); <br />
+        To force JavaScript to round up to the nearest integer, no matter how
+        small the fraction, <br />
+        use ceil instead of round. The following code rounds .000001, which
+        would normally round <br />
+        down to 0, up to the nearest integer, 1. <br />
+        var scoreAvg = Math.ceil(.000001); <br />
+        ceil stands for "ceiling." It rounds .000001 up to 1, -.000001 up to 0,
+        1.00001 up to 2, <br />
+        and so on. <br />
+        To force JavaScript to round down to the nearest integer, no matter how
+        large the <br />
+        fraction, use floor instead of round. The following code rounds .999999,
+        which would <br />
+        normally round up to 1, down to 0. <br />
+        var scoreAvg = Math.floor(.999999); <br />
+        floor rounds .999999 down to 0, 1.9 down to 1, -.000001 down to -1, and
+        so on. <br />
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Generating random numbers :-</h1>
+      <p class="ali">
+        Suppose you want to simulate the throw of a die. In the simulation, you
+        want it to <br />
+        randomly come up 1, 2, 3, 4, 5, or 6. The first step is to ask
+        JavaScript to generate a random <br />
+        number. (Well, it's almost random, technically known as pseudo-random,
+        but it's close enough <br />
+        to random for most purposes.) <br />
+        The following code generates a pseudo-random number, with 16 decimal
+        places, ranging <br />
+        from 0.0000000000000000 through 0.9999999999999999 and assigns it to the
+        variable <br />
+        randomNumber. <br />
+        var randomNumber = Math.random(); <br />
+        The function always delivers a 16-place decimal that ranges from
+        0.0000000000000000 <br />
+        to 0.9999999999999999. We can convert the decimal to an integer by
+        multiplying by one <br />
+        hundred quadrillion (1 followed by 17 zeroes): <br />
+        0.0000000000000000 * 100000000000000000 = 0 <br />
+        0.7474887706339359 * 100000000000000000 = 7474887706339359 <br />
+        0.9999999999999999 * 100000000000000000 = 9999999999999999 <br />
+        Trillions of possible numbers are more than we need in our virtual die
+        throw. We just <br />
+        want six possible numbers, 1 through 6. So instead of multiplying by a
+        hundred quadrillion, our <br />
+        first step is to multiply the giant decimal by 6. <br />
+        0.0000000000000000 * 6 = 0 <br />
+        0.7474887706339359 * 6 = 4.7474887706339359 <br />
+        0.9999999999999999 * 6 = 5.9999999999999994 <br />
+        Intuition may tell you that you can finish the job by rounding, but that
+        doesn't work out <br />
+        mathematically. Because nothing rounds up to 0 and nothing rounds down
+        to 6, the numbers in <br />
+        the middle, which are reached both by rounding up and rounding down,
+        will come up almost <br />
+        twice as often. But we can give all the numbers an equal chance if we
+        add 1 to the result, then <br />
+        round down. Here's the code for our virtual die throw. <br />
+        1 var bigDecimal = Math.random(); <br />
+        2 var improvedNum = (bigDecimal * 6) + 1; <br />
+        3 var numberOfStars = Math.floor(improvedNum); <br />
+        This is what happens in the code above, line by line: <br />
+        1. Generates a 16-place decimal and assigns it to the variable
+        bigDecimal. <br />
+        2. Converts the 16-place decimal to a number ranging from
+        0.0000000000000000 through <br />
+        5.9999999999999999, then adds 1, so the range winds up
+        1.0000000000000000 through <br />
+        6.9999999999999999. This number is assigned to the variable improvedNum.
+        <br />
+        3. Rounds the value represented by improvedNum down to the nearest
+        integer that ranges <br />
+        from 1 through 6. <br />
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Converting strings to integers and decimals :-</h1>
+      <p class="ali">
+        Sometimes JavaScript seems to read your mind. For example, suppose you
+        write... <br />
+        var currentAge = prompt("Enter your age."); <br />
+        ...JavaScript assigns the user's answer to currentAge as a string. Her
+        entry, let's say <br />32, may look like a number to you, but to
+        JavaScript it's a string: "32". <br />
+        Nevertheless, suppose you write... <br />
+        1 var currentAge = prompt("Enter your age."); <br />
+        2 var yearsEligibleToVote = currentAge - 18; <br />
+        In the above code, the value assigned to the variable currentAge is a
+        string, because it <br />
+        comes from a user's prompt response. But in line 2, when the variable
+        appears in an arithmetic <br />
+        expression, the value is automatically (and temporarily) converted to a
+        number to make the <br />
+        math work. <br />
+        Similarly, if you ask JavaScript to divide "100" by 2 or multiply "2.5"
+        by 2.5, JavaScri <br />pt seems to understand that you want the string
+        treated as a number, and does the math. You <br />
+        can even ask JavaScript to multiply, divide, or subtract using nothing
+        but strings as terms, <br />
+        and JavaScript, interpreting your intentions correctly, does the math.
+        <br />
+        var profit = "200" - "150"; <br />
+        In the statement above, the two strings are treated as numbers because
+        they appear in a <br />
+        math expression. The variable profit, in spite of the quotation marks,
+        is assigned the number <br />
+        It probably goes without saying that the string you ask JavaScript to do
+        math on has to be <br />
+        a number contained in quotes, like "50", not letter characters. If you
+        write... <br />
+        var profit = "200" - "duck"; <br />
+        ...an alert will display saying "NaN" meaning "not a number." No mystery
+        here. How can <br />
+        200 minus "duck" be a number? <br />
+        You may recall from a previous chapter that when you mix strings and
+        numbers in an <br />
+        expression involving a plus, JavaScript does the opposite of what you
+        see in the examples <br />
+        above. Rather than converting strings to numbers, JavaScript converts
+        numbers to strings. <br />
+        Rather than adding, it concatenates. <br />
+        var result = "200" + 150; <br />
+        In the statement above, JavaScript, seeing the string "200" and the
+        number 150, resolves <br />
+        the conflict by converting 150 to a string: "150". Then it concatenates
+        the two strings. The<br />
+        variable result is assigned "200150". If the + in the expression were
+        one of the other <br />
+        arithmetic operators(-, *, or /), JavaScript would convert the string
+        "200" to the number 200 <br />
+        and do the math. <br />
+        You can see there's going to be a problem with the following code.
+        <br />
+        1 var currentAge = prompt("Enter your age."); <br />
+        2 var qualifying Age = currentAge + 1; <br />
+        The code above has an unintended consequence. The string represented by
+        currentAge is <br />
+        concatenated with 1 that has been converted to "1". Example: if the user
+        enters "52," <br />
+        qualifyingAge is assigned not 53 but "521". <br />
+        If you want to do addition, you must convert any strings to numbers.
+        <br />
+        1 var currentAge = prompt("Enter your age."); <br />
+        2 var qualifyingAge = parseInt(currentAge) + 1; <br />
+        Line 2 converts the string represented by currentAge to a number before
+        adding 1 to it <br />
+        and assigning the sum to qualifyingAge. <br />
+        parseInt converts all strings, including strings comprising
+        floating-point numbers, to <br />
+        integers. And shocking but true: It it doesn't round. It simply lops off
+        the decimals. In the <br />
+        following statement, myInteger is assigned not 2 as you might expect,
+        but 1. <br />
+        var myInteger = parseInt("1.9999"); <br />
+        To preserve any decimal values, use parseFloat. In the following
+        statement <br />
+        myFractional is assigned 1.9999. <br />
+        var myFractional = parseFloat("1.9999"); <br />
+        To minimize confusion, coders sometimes prefer to do explicit, manual
+        conversions even <br />
+        when JavaScript doesn't require them, as in mixing a string and a number
+        in a multiplication <br />
+        operation. <br />
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Converting strings to numbers, numbers to strings :-</h1>
+      <p class="ali">
+        In the last chapter you learned to use parseInt to convert a string
+        representing a number <br />
+        into an integer. And you learned to use parseFloat to convert a string
+        representing a number <br />
+        into a floating-point number. You can finesse the distinction between
+        integers and floatingpoint <br />numbers by using Number. This handy
+        conversion tool converts a string representing <br />
+        either an integer or a floating-point number to a number that's
+        identical to the one inside the <br />
+        parentheses. <br />
+        The following code converts the string "24" to the number 24. <br />
+        1 var integerString = "24" <br />
+        2 var num = Number(integerString); <br />
+        The following code converts the string "24.9876" to the number 24.9876.
+        <br />
+        1 var floatingNumString = "24.9876"; <br />
+        2 var num = Number(floatingNumString); <br />
+        Suppose your code has done an arithmetic calculation that yielded a big
+        number. Now you <br />
+        want to present the result of the calculation to your user. But before
+        you display the number, <br />
+        you want to format it with commas so it's readable. In order to do that,
+        you'll have to convert <br />
+        the number to a string. This is how you do it. <br />
+        Converting a number to a string, perhaps so you can format it, is
+        straightforward. <br />
+        1 var numberAsNumber = 1234; <br />
+        2 var numberAsString = numberAsNumber.toString(); <br />
+        The code above converts the number 1234 to the string "1234" and assigns
+        it to the <br />
+        variable numberAsString. <br />
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Controlling the length of decimals :-</h1>
+      <p class="ali">
+        The price of the item is $9.95. The sales tax is 6.5% of the price. You
+        combine the two <br />
+        numbers to get the total. <br />
+        var total = price + (price * taxRate); <br />
+        The variable total now has a value of 10.59675. <br />
+        But that isn't what you're going to charge the customer, is it? You're
+        going to charge her an<br />
+        amount rounded off to two decimal places: $10.60. <br />
+        Here's how to do it. <br />
+        var prettyTotal = total.toFixed(2); <br />
+        The statement above rounds the number represented by total to 2 places
+        and assigns the <br />
+        result to the variable prettyTotal. The number inside the parentheses
+        tells JavaScript how<br />
+        many places to round the decimal to. <br />
+        Now add a dollar sign, and you're all set. <br />
+        var currencyTotal = "$" + prettyTotal; <br />
+        To shorten a number to no decimals, leave the parentheses empty. <br />
+        var prettyTotal = total.toFixed(); <br />
+        Unfortunately, the toFixed method comes with a surprise inside. If a
+        decimal ends in 5, it<br />
+        usually rounds up, as you would expect. But, depending on the browser,
+        sometimes it rou nds<br />
+        down! If, for example, you apply the method to 1.555, specifying 2
+        decimal places, it may give<br />
+        you "1.56". Or it may produce "1.55". <br />
+        There are sophisticated ways to address the problem. Here's an inelegant
+        fix that uses <br />
+        methods you already know and understand. <br />
+        1 var str = num.toString(); <br />
+        2 if (str.charAt(str.length - 1) === "5") { <br />
+        3 str = str.slice(0, str.length - 1) + "6"; <br />
+        4 } <br />
+        5 num = Number(str); <br />
+        6 prettyNum = num.toFixed(2); <br />
+        If the decimal ends in a 5, the code changes it to a 6 so the method is
+        forced to round up<br />
+        when it should. Here's what's happening, line-by-line: <br />
+        1. Converts the number to a string and assigns it to the variable str.
+        <br />
+        2. Checks to see if the last character is "5". <br />
+        3. If so, slices off the "5" and appends "6". <br />
+        4. -- <br />
+        5. Converts it back to a number. <br />
+        6. Rounds it to 2 places. <br />
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>Assignment</h1>
+      <p class="ali">
+        <object
+          data="./chapters26-30.pdf"
+          type="application/pdf"
+          width="100%"
+          height="500px"
+        >
+          <p>
+            Unable to display PDF file.
+            <a href="./chapters26-30.pdf">Download</a>
+            instead.
+          </p>
+        </object>
+      </p>
+    </div>
+    <div class="chap">
+      <h1><br />Perform The Assignment</h1>
+      <br />
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
